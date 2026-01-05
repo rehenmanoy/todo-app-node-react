@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+  font-family: "Georgia", serif;
+}
+
+body {
+  margin: 0;
+  background: #f2f2f2;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.paper {
+  background: white;
+  width: 480px;
+  border: 2px solid #222;
+  padding: 30px;
+}
+
+.title {
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #999;
+}
+
+.input-row button {
+  padding: 8px 14px;
+  border: 1px solid #222;
+  background: white;
+  cursor: pointer;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.task-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #222;
+  padding-bottom: 6px;
+}
+
+.task-row span {
+  flex: 1;
+}
+
+.task-row span.done {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.task-row .delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
