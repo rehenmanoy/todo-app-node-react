@@ -18,11 +18,19 @@ app.post("/createUser" , async (req , res) => {
     const email = req.body.email;
     const pass = req.body.password;
     try{
+        const check = await pool.query(
+            "SELECT EXISTS(SELECT 1 FROM users WHERE email = $1)",
+            [email]
+        );
+        if(check.rows[0].exists){
+             return res.status(409).json({error : "Email Already Exists"})
+        }
         const hashedPass = await bcrypt.hash(pass , 10)
         const result  = await pool.query(
             "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING*",
             [name , email , hashedPass]
         );
+
         res.status(201).json(result.rows[0]);
     }catch (err){
         res.status(500).json({error : err.message});
