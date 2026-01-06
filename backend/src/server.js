@@ -36,10 +36,11 @@ app.post("/addtask" , authenticateToken ,async (req , res) => {
         if(!title){
             return res.status(400).json({error : "Title Required"});
         }
+        console.log(req.user)
 
         const result = await pool.query(
-            "INSERT INTO tasks (title) VALUES ($1) RETURNING *",
-            [title]
+            "INSERT INTO tasks (title ,user_id) VALUES ($1, $2) RETURNING *",
+            [title , req.user.id]
         );
         res.status(201).json(result.rows[0]);
     } catch (err){
@@ -50,7 +51,8 @@ app.post("/addtask" , authenticateToken ,async (req , res) => {
 app.get("/tasks" , authenticateToken , async (req,res) => {
     try{
         const result = await pool.query(
-            "SELECT * FROM tasks ORDER BY created_at DESC"
+            "SELECT * FROM tasks WHERE user_id = $1",
+            [req.user.id]
         );
         res.json({
             tasks:result.rows
@@ -81,8 +83,8 @@ app.put("/tasks/:id", authenticateToken ,async (req, res) => {
     const { completed } = req.body;
 
     const result = await pool.query(
-      "UPDATE tasks SET completed = $1 WHERE id = $2 RETURNING *",
-      [completed, id]
+      "UPDATE tasks SET completed = $1 WHERE id = $2 AND user_id = $3 RETURNING *",
+      [completed, id , req.user.id]
     );
 
     if (result.rows.length === 0) {
@@ -100,8 +102,8 @@ app.delete("/tasks/:id" , authenticateToken ,  async (req, res) => {
         const { id } = req.params;
 
         const result = await pool.query(
-            "DELETE FROM tasks WHERE id = $1 RETURNING *",
-            [id]
+            "DELETE FROM tasks WHERE id = $1 AND user_id = $2 RETURNING *",
+            [id , req.user.id]
         );
         if (result.rows.length === 0){
             return res.status(404).json({error : "Task not found"})
@@ -136,7 +138,7 @@ app.post("/login" , async (req , res) => {
         }
 
         const payload = {
-            id : userInfoFromDB.id,
+            id : userInfoFromDB.user_id,
             email : userInfoFromDB.email
         };
         const accessToken = jwt.sign(
