@@ -86,6 +86,12 @@ ToDo-APP
 └── README.md
 ```
 ---
+### 🔐 `.env` Files
+The `.env` files are used to store **environment-specific and sensitive information** such as database credentials, API base URLs, and JWT secrets.  
+These files are **not committed to GitHub** for security reasons and must be created locally before running the project.
+
+
+---
 
 ▶️ How to Run the Project<br>
 1️⃣ Backend Setup
