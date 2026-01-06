@@ -1,74 +1,137 @@
-# Todo App – Node.js, PostgreSQL, React, JWT
+# 📝 ToDo App (Node.js + React + PostgreSQL)
 
-A full-stack To-Do application built using **Node.js**, **Express**, **PostgreSQL**, **JWT authentication**, and a **React (Vite) frontend**.  
-Each user can securely log in and manage their own tasks.
+A full-stack **To-Do application** built using **Node.js, Express, PostgreSQL, and React (Vite)**.  
+This project focuses on **learning backend–frontend integration**, **JWT authentication**, and **user-specific data handling**.
 
 ---
 
 ## 🚀 Features
 
-- User authentication using JWT
-- Password hashing with bcrypt
-- RESTful API using Express
-- PostgreSQL database
-- CRUD operations for tasks
+### ✅ Implemented
+- User registration (with password hashing)
+- User login with JWT authentication
+- Token storage using `localStorage`
+- Protected backend routes using JWT middleware
 - User-specific tasks (each user sees only their own tasks)
-- React frontend with real-time UI updates
+- Create, read, update, and delete (CRUD) tasks
+- Modern notebook-style UI
+- Clean project separation (frontend & backend)
+
+### 🛠 In Progress / Learning Focus
+- Frontend route protection
+- Token reuse & refresh strategy
+- Better error handling and UI feedback
+- Logout flow improvements
 
 ---
 
-## 🛠 Tech Stack
+## 🧱 Tech Stack
 
-**Backend**
+### Backend
 - Node.js
 - Express.js
 - PostgreSQL
 - JWT (jsonwebtoken)
 - bcrypt
+- pg (node-postgres)
 - dotenv
-- cors
 
-**Frontend**
-- React
-- Vite
-- Fetch API
-- CSS
+### Frontend
+- React (Vite)
+- React Router
+- Lucide Icons
+- CSS (custom notebook theme)
 
 ---
 
 ## 📁 Project Structure
+
 ```
-todo-app-node-react/
+ToDo-APP
 │
-├── backend/
-│ ├── src/
-│ ├── middleware/
-│ ├── .env.example
+├── backend
+│ ├── middleware
+│ │ └── auth.js
+│ ├── src
+│ │ ├── db.js
+│ │ └── server.js
+│ ├── .env
 │ ├── package.json
-│ └── package-lock.json
+│ └── node_modules
 │
-├── frontend/
-│ ├── src/
-│ ├── public/
+├── frontend
+│ ├── public
+│ │ ├── tick.svg
+│ │ └── vite.svg
+│ ├── src
+│ │ ├── assets
+│ │ │ └── react.svg
+│ │ ├── pages
+│ │ │ ├── Login
+│ │ │ │ ├── login.jsx
+│ │ │ │ └── login.css
+│ │ │ └── TODO
+│ │ │ ├── todo.jsx
+│ │ │ └── todo.css
+│ │ ├── utils
+│ │ │ └── api.js
+│ │ ├── App.jsx
+│ │ ├── main.jsx
+│ │ └── index.css
+│ ├── .env
 │ ├── index.html
-│ ├── vite.config.js
 │ ├── package.json
-│ └── package-lock.json
+│ └── vite.config.js
 │
 └── README.md
 ```
+---
 
-## 🎯 Purpose
+▶️ How to Run the Project<br>
+1️⃣ Backend Setup
+```
+cd backend
+npm install
+npm run devStart
+```
+Backend runs at:<br>
+```
+http://localhost:5000
+```
+---
 
-This project was built to learn:
-- JWT authentication and authorization
-- Backend-frontend integration
-- PostgreSQL relational design
-- Secure API development
-- Real-world project structure
+2️⃣ Frontend Setup
+```
+cd frontend
+npm install
+npm run dev
+```
+Frontend runs at:
+```
+http://localhost:5173
+```
+---
+### 🔐 Authentication Flow (Simplified)
+
+- User logs in
+- Backend generates JWT
+- Token stored in localStorage
+- Token sent in Authorization header
+- Backend middleware validates token
+- User ID from token used to fetch tasks
 
 ---
 
-## 👤 Author
+### 📌 Learning Goals of This Project
 
-**Rehen Manoy**
+- Understand JWT authentication deeply
+- Learn how frontend and backend communicate
+- Practice PostgreSQL relational design
+- Structure a scalable React project
+- Implement protected routes and user-based access
+
+---
+
+### 👤 Author
+
+***Rehen Manoy***
